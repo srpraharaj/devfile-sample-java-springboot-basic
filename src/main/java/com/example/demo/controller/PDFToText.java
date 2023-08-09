@@ -1,4 +1,4 @@
-package com.nassiesse.ocr.controller;
+package com.example.demo.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -27,11 +27,6 @@ import net.sourceforge.tess4j.TesseractException;
 
 @RestController
 public class PDFToText {
-
-	@RequestMapping("/")
-    String home() {
-        return "Hello World from PDFToText";
-    }
 
 	@PostMapping("/api/pdf/extractText")
     public @ResponseBody ResponseEntity<String> 
