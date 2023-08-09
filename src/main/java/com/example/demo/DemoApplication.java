@@ -33,6 +33,7 @@ import net.sourceforge.tess4j.TesseractException;
 
 
 @SpringBootApplication
+@RestController
 public class DemoApplication {
 
 
