@@ -27,6 +27,11 @@ import net.sourceforge.tess4j.TesseractException;
 @RestController
 public class PDFToText {
 
+	@RequestMapping("/")
+    String home() {
+        return "Hello World from PDFToText";
+    }
+
 	@PostMapping("/api/pdf/extractText")
     public @ResponseBody ResponseEntity<String> 
 					extractTextFromPDFFile(@RequestParam("file") MultipartFile file) {
