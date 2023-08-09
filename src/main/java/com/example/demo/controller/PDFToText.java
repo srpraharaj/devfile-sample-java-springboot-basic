@@ -25,7 +25,7 @@ import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
 @RestController
-public class SimpleOCRController {
+public class PDFToText {
 
 	@PostMapping("/api/pdf/extractText")
     public @ResponseBody ResponseEntity<String> 
