@@ -1,4 +1,4 @@
-package com.ibm.watsonx.pdftotext.controller;
+package com.example.demo.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
