@@ -21,17 +21,44 @@ import org.springframework.web.bind.annotation.RestController;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class PDFToText {
 
-	@PostMapping("/api/pdf/extractText")
+	@PostMapping("/api/pdf/extractTextFromByte")
     public @ResponseBody ResponseEntity<String> 
 					extractTextFromPDFFile(@RequestParam("file") byte[] byteArray) {
 		try {
 			
 			// Load file into PDFBox class
 			PDDocument document = PDDocument.load(byteArray);
+			PDFTextStripper stripper = new PDFTextStripper();
+			String strippedText = stripper.getText(document);
+			
+			// Check text exists into the file
+			if (strippedText.trim().isEmpty()){
+				strippedText = extractTextFromScannedDocument(document);
+			}
+			
+			JSONObject obj = new JSONObject();
+	        obj.put("fileName", "testfile");
+	        obj.put("text", strippedText.toString());
+			
+			return new ResponseEntity<String>(obj.toString(), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
+
+	@PostMapping("/api/pdf/extractTextFromFile")
+    public @ResponseBody ResponseEntity<String> 
+					extractTextFromPDFFile(@RequestParam("file") MultipartFile file) {
+		try {
+			
+			// Load file into PDFBox class
+			PDDocument document = PDDocument.load(file.getBytes());
 			PDFTextStripper stripper = new PDFTextStripper();
 			String strippedText = stripper.getText(document);
 			
