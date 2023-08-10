@@ -30,11 +30,11 @@ public class PDFToText {
 
 	@PostMapping("/api/pdf/extractText")
     public @ResponseBody ResponseEntity<String> 
-					extractTextFromPDFFile(@RequestParam("file") MultipartFile file) {
+					extractTextFromPDFFile(@RequestParam("file") byte[] byteArray) {
 		try {
 			
 			// Load file into PDFBox class
-			PDDocument document = PDDocument.load(file.getBytes());
+			PDDocument document = PDDocument.load(byteArray);
 			PDFTextStripper stripper = new PDFTextStripper();
 			String strippedText = stripper.getText(document);
 			
@@ -44,7 +44,7 @@ public class PDFToText {
 			}
 			
 			JSONObject obj = new JSONObject();
-	        obj.put("fileName", file.getOriginalFilename());
+	        obj.put("fileName", "testfile");
 	        obj.put("text", strippedText.toString());
 			
 			return new ResponseEntity<String>(obj.toString(), HttpStatus.OK);
