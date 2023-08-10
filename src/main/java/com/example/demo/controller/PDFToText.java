@@ -28,7 +28,7 @@ public class PDFToText {
 
 	@PostMapping("/api/pdf/extractTextFromByte")
     public @ResponseBody ResponseEntity<String> 
-					extractTextFromPDFFile(@RequestParam("file") byte[] byteArray) {
+					extractTextFromBytes(@RequestParam("file") byte[] byteArray) {
 		try {
 			
 			// Load file into PDFBox class
