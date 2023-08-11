@@ -23,6 +23,8 @@ import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.model.ResponseObject;
+
 @RestController
 public class PDFToText {
 
@@ -85,18 +87,24 @@ public class PDFToText {
     }
 
 	@GetMapping("/api/pdf/extractdept")
-    public ResponseEntity<Object> getDepartment() {
+    public ResponseEntity<JSONObject> extractDepartment() {
 		JSONObject fileContent = new JSONObject();
 		fileContent.put("department", "Auto");
 		fileContent.put("policyNumber", "AUTO1234");
 		fileContent.put("policyDate", "08/08/2023");
 
-	
 		JSONObject resObj = new JSONObject();
 		resObj.put("fileName", "autofile.csv");
 		resObj.put("fileContent", fileContent.toString());
 		resObj.put("parentId", "221446918857");
-		return new ResponseEntity<Object>(resObj, HttpStatus.OK);
+
+		return new ResponseEntity<JSONObject>(resObj, HttpStatus.OK);
+    }
+
+	@GetMapping("/api/pdf/getdept")
+    public ResponseEntity<ResponseObject> getDepartment() {
+		ResponseObject resObj = new ResponseObject();
+		return new ResponseEntity<ResponseObject>(resObj, HttpStatus.OK);
     }
 
 	private String extractTextFromScannedDocument(PDDocument document) throws IOException, TesseractException {
