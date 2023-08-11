@@ -85,9 +85,18 @@ public class PDFToText {
     }
 
 	@GetMapping("/api/pdf/extractdept")
-    public ResponseEntity<String> getDepartment()
-    {
-		return new ResponseEntity<String>("Auto", HttpStatus.OK);
+    public ResponseEntity<Object> getDepartment() {
+		JSONObject fileContent = new JSONObject();
+		fileContent.put("department", "Auto");
+		fileContent.put("policyNumber", "AUTO1234");
+		fileContent.put("policyDate", "08/08/2023");
+
+	
+		JSONObject resObj = new JSONObject();
+		resObj.put("fileName", "autofile.csv");
+		resObj.put("fileContent", fileContent.toString());
+		resObj.put("parentId", "221446918857");
+		return new ResponseEntity<Object>(resObj, HttpStatus.OK);
     }
 
 	private String extractTextFromScannedDocument(PDDocument document) throws IOException, TesseractException {
