@@ -24,6 +24,7 @@ import net.sourceforge.tess4j.TesseractException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.ResponseObject;
+import com.example.demo.model.PDFContent;
 
 @RestController
 public class PDFToText {
@@ -103,7 +104,12 @@ public class PDFToText {
 
 	@GetMapping("/api/pdf/getdept")
     public ResponseEntity<ResponseObject> getDepartment() {
+
+		PDFContent pdfContent = new PDFContent();
+
 		ResponseObject resObj = new ResponseObject();
+		resObj.setPdfContent(pdfContent);
+
 		return new ResponseEntity<ResponseObject>(resObj, HttpStatus.OK);
     }
 
