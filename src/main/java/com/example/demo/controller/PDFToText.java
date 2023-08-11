@@ -84,6 +84,12 @@ public class PDFToText {
 		return new ResponseEntity<String>("PONG", HttpStatus.OK);
     }
 
+	@GetMapping("/api/pdf/extractdept")
+    public ResponseEntity<String> getDepartment()
+    {
+		return new ResponseEntity<String>("Auto", HttpStatus.OK);
+    }
+
 	private String extractTextFromScannedDocument(PDDocument document) throws IOException, TesseractException {
 		
 		// Extract images from file
