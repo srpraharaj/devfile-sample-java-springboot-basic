@@ -1,7 +1,6 @@
 package com.example.demo.model;
-​
+
 public class PDFContent {
-​
 	private String department;
 	private String policyNo;
 	private String policyDate;
